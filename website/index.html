@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Neet Beauty Ultra Studio</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Poppins,sans-serif;}
+body{background:#0a0a0a;color:#fff;overflow-x:hidden;}
+
+/* BACKGROUND */
+body::before{
+content:"";
+position:fixed;
+width:100%;
+height:100%;
+background:radial-gradient(circle at 20% 20%, #1a1a1a, transparent 40%),
+radial-gradient(circle at 80% 80%, #2a1f1f, transparent 40%);
+z-index:-1;
+animation:bg 12s infinite alternate;
+}
+@keyframes bg{0%{transform:scale(1);}100%{transform:scale(1.2);}}
+
+/* NAV */
+nav{
+position:fixed;
+top:0;
+width:100%;
+display:flex;
+justify-content:space-between;
+padding:15px 8%;
+background:rgba(0,0,0,0.6);
+backdrop-filter:blur(10px);
+border-bottom:1px solid #222;
+z-index:1000;
+}
+nav h2{color:#ffd700;}
+nav a{color:#fff;margin-left:15px;text-decoration:none;cursor:pointer;}
+nav a:hover{color:#ffd700;}
+
+/* SECTIONS */
+section{padding:120px 10%;}
+
+/* HERO */
+.hero{text-align:center;padding-top:150px;}
+.hero h1{font-size:55px;color:#ffd700;}
+.hero p{color:#ccc;margin-top:10px;}
+.badge{display:inline-block;margin-top:20px;padding:8px 15px;border:1px solid #ffd700;border-radius:20px;color:#ffd700;}
+
+/* GRID */
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+gap:15px;
+margin-top:30px;
+}
+
+/* CARD */
+.card{
+background:#141414;
+border-radius:15px;
+overflow:hidden;
+border:1px solid #222;
+transition:0.3s;
+}
+.card:hover{transform:scale(1.03);border-color:#ffd700;}
+
+.card img{
+width:100%;
+height:160px;
+object-fit:cover;
+}
+
+.card-content{padding:15px;}
+
+.price{color:#ffd700;margin-top:5px;font-weight:600;}
+
+/* BOOKING */
+.booking{
+margin-top:60px;
+background:#141414;
+padding:25px;
+border-radius:15px;
+border:1px solid #222;
+}
+
+input,select{
+width:100%;
+padding:12px;
+margin-top:10px;
+background:#111;
+border:1px solid #333;
+color:#fff;
+border-radius:10px;
+}
+
+.btn{
+margin-top:15px;
+padding:12px;
+width:100%;
+background:#ffd700;
+border:none;
+border-radius:25px;
+font-weight:600;
+cursor:pointer;
+}
+
+#msg{margin-top:15px;color:#25D366;}
+
+/* APPOINTMENT LIST */
+.list{
+margin-top:20px;
+background:#111;
+padding:15px;
+border-radius:10px;
+border:1px solid #222;
+font-size:13px;
+color:#ccc;
+}
+</style>
+</head>
+
+<body>
+
+<nav>
+<h2>Neet Beauty</h2>
+<div>
+<a onclick="scrollToSec('home')">Home</a>
+<a onclick="scrollToSec('services')">Services</a>
+<a onclick="scrollToSec('booking')">Booking</a>
+</div>
+</nav>
+
+<!-- HOME -->
+<section id="home">
+
+<div class="hero">
+<h1>Luxury Beauty Studio</h1>
+<p>Professional Hair • Skin • Makeup Studio</p>
+<div class="badge">₹49 Booking Fee</div>
+</div>
+
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+
+<h2 style="color:#ffd700;">Our Services</h2>
+
+<div class="grid">
+
+<div class="card">
+<img src="https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9">
+<div class="card-content">
+Hair Styling
+<div class="price">₹199</div>
+</div>
+</div>
+
+<div class="card">
+<img src="https://images.unsplash.com/photo-1521590832167-7bcbfaa6381f">
+<div class="card-content">
+Bridal Makeup
+<div class="price">₹2999</div>
+</div>
+</div>
+
+<div class="card">
+<img src="https://images.unsplash.com/photo-1559599101-f09722fb4948">
+<div class="card-content">
+Facial & Skin Care
+<div class="price">₹499</div>
+</div>
+</div>
+
+<div class="card">
+<img src="https://images.unsplash.com/photo-1595476108010-b4d1f102b1b1"> 
+<div class="card-content"> 
+Nail Art 
+<div class="price">₹699</div> 
+</div> 
+</div> 
+ 
+</div> 
+ 
+</section> 
+ 
+<!-- BOOKING --> 
+<section id="booking"> 
+ 
+<h2 style="color:#ffd700;">Book Appointment</h2> 
+ 
+<div class="booking"> 
+ 
+<select id="service"> 
+<option>Hair Styling</option> 
+<option>Bridal Makeup</option> 
+<option>Facial</option> 
+<option>Nail Art</option> 
+</select> 
+ 
+<input type="date" id="date"> 
+<input type="time" id="time"> 
+ 
+<button class="btn" onclick="book()">Book ₹49 Slot</button> 
+ 
+<p id="msg"></p> 
+ 
+<div class="list" id="list"> 
+No bookings yet. 
+</div> 
+ 
+</div> 
+ 
+</section> 
+ 
+<script> 
+ 
+function scrollToSec(id){ 
+document.getElementById(id).scrollIntoView({behavior:'smooth'}); 
+} 
+ 
+let bookings = []; 
+ 
+function book(){ 
+ 
+let s = document.getElementById("service").value; 
+let d = document.getElementById("date").value; 
+let t = document.getElementById("time").value; 
+ 
+if(!d || !t){ 
+document.getElementById("msg").innerText="Please select date and time"; 
+return; 
+} 
+ 
+let data = `Service: ${s} | Date: ${d} | Time: ${t}`; 
+ 
+bookings.push(data); 
+ 
+document.getElementById("msg").innerText = 
+"Booking Confirmed ✔ ₹49 received (demo)"; 
+ 
+document.getElementById("list").innerHTML = 
+bookings.map(b => "<div>• "+b+"</div>").join(""); 
+ 
+} 
+ 
+</script> 
+ 
+</body> 
+</html>
